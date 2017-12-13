@@ -32,7 +32,7 @@ public class dialogAddWeight extends DialogFragment implements OnClickListener {
     SQLiteDatabase db;
     ContentValues cv;
     Date date;
-    InputFilter inputFilter;
+    InputFilter inputFilter; //HELLO
 
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
