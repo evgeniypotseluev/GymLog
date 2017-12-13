@@ -34,7 +34,6 @@ public class dialogAddWeight extends DialogFragment implements OnClickListener {
     Date date;
     InputFilter inputFilter;
 
-
     public View onCreateView(LayoutInflater inflater, final ViewGroup container,
                              Bundle savedInstanceState) {
         getDialog().setTitle("Title!");
