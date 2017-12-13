@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">GymLog</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+    <string name="settings">Settings</string>
+    <string name="title_activity_welcome">WelcomeActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+    <string name="skip">Skip</string>
+    <string name="getLaterToWelcome">You can also return to this in settings</string>
+    <string name="male">Male</string>
+    <string name="female">Female</string>
+    <string name="Sex">Sex</string>
+    <string name="Growth">Growth</string>
+    <string name="Weight">Weight</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="stats">Показатели</string>
+    <string name="add_weight">Add weight</string>
+
+
+    <string name="dialog_1">Dialog 1</string>
+    <string name="dialog_2">Dialog 2</string>
+    <string name="message_text">Text of your message</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="maybe">Maybe</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="plus05">+0.5</string>
+    <string name="minus05">-0.5</string>
+
+</resources>
