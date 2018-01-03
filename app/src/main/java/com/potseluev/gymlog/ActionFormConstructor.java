@@ -10,11 +10,15 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 
+import java.util.List;
+
 public class ActionFormConstructor extends Fragment {
 
 
     final String[] mCats = {"Мурзик", "Рыжик", "Барсик", "Борис",
             "Мурзилка", "Мурка", "tag1", "tag2", "tag3", "tag4"};
+
+    private List<String> mTagsList = null;
 
     public ActionFormConstructor() {
         // Required empty public constructor
@@ -37,8 +41,13 @@ public class ActionFormConstructor extends Fragment {
                              Bundle savedInstanceState) {
         @SuppressLint("InflateParams") View v = inflater.inflate(R.layout.fragment_action_form_constructor, null);
         AutoCompleteTextView mAutoCompleteTextView = v.findViewById(R.id.autoCompleteTextView);
+        mAutoCompleteTextView.setThreshold(1);
+
+
         mAutoCompleteTextView.setAdapter(new ArrayAdapter<>(getContext(),
                 android.R.layout.simple_dropdown_item_1line, mCats));
+
+
         return v;
     }
 
