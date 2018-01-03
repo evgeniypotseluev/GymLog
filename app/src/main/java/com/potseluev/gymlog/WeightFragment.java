@@ -1,22 +1,21 @@
 package com.potseluev.gymlog;
 
+import android.annotation.SuppressLint;
 import android.graphics.Color;
 import android.graphics.DashPathEffect;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet;
-import com.github.mikephil.charting.utils.Utils;
 
 import java.util.ArrayList;
 
@@ -40,8 +39,7 @@ public class WeightFragment extends Fragment {
     }
 
     public static WeightFragment newInstance(String param1, String param2) {
-        WeightFragment fragment = new WeightFragment();
-        return fragment;
+        return new WeightFragment();
     }
 
     @Override
@@ -56,7 +54,7 @@ public class WeightFragment extends Fragment {
         //по умолчанию эта штука создает вьюху и возвращает ее в стеку выше.
         // т.е. взаимодейстовать с ней нельзя тут. поэтому создаем свою вьюху и кидаем ее на выход.
 //        return inflater.inflate(R.layout.fragment_weight, container, false);
-        View v = inflater.inflate(R.layout.fragment_weight, null);
+        @SuppressLint("InflateParams") View v = inflater.inflate(R.layout.fragment_weight, null);
 
         mChart = v.findViewById(R.id.chartWeight);
 //        mChart.setBackgroundColor(Color.LTGRAY);
@@ -82,16 +80,6 @@ public class WeightFragment extends Fragment {
 
     private void setData(int count, float range) {
         ArrayList<Entry> values;
-//        ArrayList<Entry> values = new ArrayList<Entry>();
-//        for (int i = 0; i < count; i++) {
-//
-//            float val = (float) (Math.random() * range) + 3;
-////            float val = (float);
-//
-//
-//            values.add(new Entry(i, val, getResources().getDrawable(R.drawable.ic_action_next)));
-//        }
-
         dbHelper = new DBHelper(getContext());
         values = dbHelper.getAllWeight();
 
@@ -102,17 +90,19 @@ public class WeightFragment extends Fragment {
             set1.setValues(values);
             mChart.getData().notifyDataChanged();
             mChart.notifyDataSetChanged();
+            mChart.getDescription().setEnabled(false);
+
         } else {
             // create a dataset and give it a type
-            set1 = new LineDataSet(values, "DataSet 1");
+            set1 = new LineDataSet(values, getString(R.string.weight));
 
             set1.setDrawIcons(false);
 
             // set the line to be drawn like this "- - - - - -"
             set1.enableDashedLine(10f, 5f, 0f);
             set1.enableDashedHighlightLine(10f, 5f, 0f);
-            set1.setColor(Color.BLACK);
-            set1.setCircleColor(Color.BLACK);
+            set1.setColor(R.color.colorPrimaryDark);
+            set1.setCircleColor(R.color.colorPrimaryDark);
             set1.setLineWidth(1f);
             set1.setCircleRadius(3f);
             set1.setDrawCircleHole(false);
@@ -122,16 +112,11 @@ public class WeightFragment extends Fragment {
             set1.setFormLineDashEffect(new DashPathEffect(new float[]{10f, 5f}, 0f));
             set1.setFormSize(15.f);
 
-//            if (Utils.getSDKInt() >= 18) {
-//                // fill drawable only supported on api level 18 and above
-//                Drawable drawable = ContextCompat.getDrawable(getContext(), R.drawable.fab_add);
-//                set1.setFillDrawable(drawable);
-//            } else {
-                set1.setFillColor(Color.GREEN);
-//            }
+            set1.setFillColor(Color.GREEN);
+
         }
 
-        ArrayList<ILineDataSet> dataSets = new ArrayList<ILineDataSet>();
+        ArrayList<ILineDataSet> dataSets = new ArrayList<>();
         dataSets.add(set1); // add the datasets
 
         // create a data object with the datasets

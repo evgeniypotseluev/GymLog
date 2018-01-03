@@ -14,4 +14,9 @@
     <string name="cancel">Отмена</string>
     <string name="plus05">+0.5</string>
     <string name="minus05">-0.5</string>
+    <string name="weight">Вес</string>
+    <string name="weight_dynamic">Динамика веса</string>
+    <string name="tagname">Название тэга</string>
+    <string name="tagName">Название тэга</string>
+    <string name="Save">Сохранить</string>
 </resources>

@@ -32,7 +32,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:paddingBottom="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -54,12 +54,12 @@
             app:fab_colorRipple="#99FFFFFF" />
 
         <com.github.clans.fab.FloatingActionButton
-            android:id="@+id/fab2"
-            app:fab_label="Remove button"
+            android:id="@+id/fabNewTag"
+            app:fab_label="Создать тэг"
             app:fab_size="mini"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/ic_plus_white_24dp"
+            android:src="@drawable/ic_developer_board"
             app:fab_colorNormal="@color/colorAccent"
             app:fab_colorPressed="@color/colorPrimary"
             app:fab_colorRipple="#99FFFFFF" />

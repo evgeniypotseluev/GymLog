@@ -5,6 +5,7 @@ package com.potseluev.gymlog;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -16,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Toast;
 
 import com.github.clans.fab.FloatingActionButton;
 import com.github.clans.fab.FloatingActionMenu;
@@ -31,6 +33,8 @@ public class MainActivity extends AppCompatActivity
     android.app.DialogFragment dlgAddWeight;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,23 +43,24 @@ public class MainActivity extends AppCompatActivity
 //        openWelcomeActivity(); //Откроем окно с приглашением, если раньше не открывали
 
         setContentView(R.layout.activity_main);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         //fab
         menuRed = findViewById(R.id.menu_red);
         menuRed.setClosedOnTouchOutside(true);
+
         fab1 = findViewById(R.id.fab1);
-        fab2 = findViewById(R.id.fab2);
+        fab2 = findViewById(R.id.fabNewTag);
         fab3 = findViewById(R.id.fab3);
         fab1.setOnClickListener(fabOnClickListener);
         fab2.setOnClickListener(fabOnClickListener);
@@ -70,11 +75,22 @@ public class MainActivity extends AppCompatActivity
         public void onClick(View v) {
             switch (v.getId()) {
                 case R.id.fab1:
+                    menuRed.close(true);
                     break;
-                case R.id.fab2:
+                case R.id.fabNewTag:
+                    Toast.makeText(MainActivity.this, "Create new Tag Form", Toast.LENGTH_SHORT).show();
+
+                    Fragment fragment = new ActionFormConstructor();
+
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
+
+                    menuRed.close(true);
+
                     break;
                 case R.id.fab3: //Добавление веса
                     dlgAddWeight.show(getFragmentManager(), "dlgAddWeight");
+                    menuRed.close(true);
                     break;
             }
         }
@@ -82,7 +98,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
@@ -114,7 +130,7 @@ public class MainActivity extends AppCompatActivity
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
         // Handle navigation view item clicks here.
         Fragment fragment = null;
         Class fragmentClass = null;
@@ -135,10 +151,9 @@ public class MainActivity extends AppCompatActivity
         }
 
         try {
+            assert fragmentClass != null;
             fragment = (Fragment) fragmentClass.newInstance();
-        } catch (InstantiationException e) {
-            e.printStackTrace();
-        } catch (IllegalAccessException e) {
+        } catch (InstantiationException | IllegalAccessException e) {
             e.printStackTrace();
         }
 
@@ -147,7 +162,7 @@ public class MainActivity extends AppCompatActivity
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.beginTransaction().replace(R.id.flContent, fragment).commit();
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
